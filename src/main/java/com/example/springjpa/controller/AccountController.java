@@ -3,6 +3,7 @@ package com.example.springjpa.controller;
 import com.example.springjpa.model.entity.Account;
 import com.example.springjpa.model.request.AccountLogin;
 import com.example.springjpa.model.request.AccountRequest;
+import com.example.springjpa.model.response.AccountResponse;
 import com.example.springjpa.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,5 +36,17 @@ public class AccountController {
     ResponseEntity<Account> create(@RequestBody AccountRequest request) {
         Account account = service.create(request);
         return ResponseEntity.ok(account);
+    }
+
+    @GetMapping("/customize/{username}/{name}")
+    ResponseEntity<Account> getCustomizeAccount(@PathVariable("username") String username,
+                                                @PathVariable("name") String name) {
+        return ResponseEntity.ok(service.getAccountByUsernameAndName(username, name));
+    }
+
+    @GetMapping("/customize4/{username}/{name}")
+    ResponseEntity<AccountResponse> getCustomizeAccount4th(@PathVariable("username") String username,
+                                                           @PathVariable("name") String name) {
+        return ResponseEntity.ok(service.getAccountByUsernameAndNameInterface(username, name));
     }
 }

@@ -3,6 +3,7 @@ package com.example.springjpa.service;
 import com.example.springjpa.model.entity.Account;
 import com.example.springjpa.model.request.AccountLogin;
 import com.example.springjpa.model.request.AccountRequest;
+import com.example.springjpa.model.response.AccountResponse;
 import com.example.springjpa.repository.AccountRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,5 +48,15 @@ public class AccountServiceImpl implements IAccountService {
         account.setProfileId(request.getProfileId());
         repository.save(account);
         return account;
+    }
+
+    @Override
+    public Account getAccountByUsernameAndName(String username, String name) {
+        return repository.findCustomizeAccountSecond(username, name);
+    }
+
+    @Override
+    public AccountResponse getAccountByUsernameAndNameInterface(String username, String name) {
+        return repository.findCustomizeAccount4th(username, name);
     }
 }
